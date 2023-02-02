@@ -40,14 +40,14 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     const interval = 10;
-    let arr = [];
+    let string = "";
 
     for (i = 0; i < expr.length; i += interval) {
         let str = expr.substring(i, i + interval);
-        arr.push(str.substring(str.indexOf("1")));
+        str = str.substring(str.indexOf("1")).replace(/10/g, ".").replace(/11/g, "-");
+        string += [str].map(e => e = MORSE_TABLE[e]).join("");
     }
-    
-    return arr.map(e => e.replace(/10/g, ".")).map(e => e.replace(/11/g, "-")).map(e => e = MORSE_TABLE[e]).join("");
+    return string;
 }
 
 module.exports = {
